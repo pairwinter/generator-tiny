@@ -48,6 +48,7 @@ var TinyGenerator = yeoman.generators.Base.extend({
 
   end: function () {
     this.installDependencies();
+
   }
 });
 
