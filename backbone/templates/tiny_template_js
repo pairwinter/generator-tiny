@@ -1,0 +1,60 @@
+;define('{{defineName}}',function(require, exports, module){
+
+    {{#if htmlTemplate}}
+	var template = require("{{htmlTemplate}}");
+	if(template !== true){
+		$('body').append(template);
+	}
+	{{/if}}
+
+    var {{appName}} = {
+        {{#if model}}
+        Model: {
+            defaults: function () {
+                return {
+                };
+            },
+            initialize: function (attributes, options) {
+
+            },
+            parseData: function (data) {
+
+            }
+        },
+        {{/if}}
+        View: {
+            jDom: {},
+            subApps: {},
+            template: {},
+            initialize: function () {
+                {{#if htmlTemplate}}
+                $.templates({
+                    {{htmlTemplateId}}: $("#{{htmlTemplateId}}").html()
+                });
+                this.template.{{htmlTemplateId}} = $.render.{{htmlTemplateId}};
+                this.$el.html(this.template.{{htmlTemplateId}}(this.getIdSuffixModelJSON()));
+                {{/if}}
+            },
+            render: function () {
+                var view = this;
+            },
+            events: function () {
+                var events = {
+                };
+                return this.dealEvents(events, this.cid);
+            },
+            getJsonData: function () {
+
+            }
+
+        },
+        getInstance: function (container, model, parentApp, options) {
+            options = $.extend(true, {}, options || {});
+            var View = EB_Common.Backbone.View.extend(this.View);
+            model = model || new Backbone.Model();
+            return new View($.extend({ parentApp: parentApp, el: container, model: model },options||{}));
+        }
+    };
+
+    return {{appName}};
+});

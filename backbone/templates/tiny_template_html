@@ -1,0 +1,8 @@
+<script type="text/x-jsrender" id="{{htmlTemplateId}}">
+
+</script>
+<script type="text/javascript">
+   ;define("{{htmlTemplate}}",function(){
+       return true;
+   });
+</script>

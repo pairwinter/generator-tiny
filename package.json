@@ -1,0 +1,39 @@
+{
+  "name": "generator-tiny",
+  "version": "0.0.1",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "pairwinter/generator-tiny",
+  "author": {
+    "name": "pairwinter",
+    "email": "pairwinter@gmail.com",
+    "url": "https://github.com/pairwinter"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app",
+    "backbone"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^0.5.0",
+    "handlebars": "^2.0.0",
+    "yeoman-generator": "^0.17.0",
+    "yosay": "^0.3.0"
+  },
+  "devDependencies": {
+    "handlebars": "^2.0.0",
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}
