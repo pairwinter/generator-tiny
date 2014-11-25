@@ -28,7 +28,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             {
                 type: 'input',
                 name: 'rootPath',
-                message: 'The root path that you place defined js.',
+                message: 'The root path that you place javascript and template files.',
                 default: this.destinationRoot()
             }
         ];
