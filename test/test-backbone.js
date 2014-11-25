@@ -10,19 +10,17 @@ describe('tiny:backbone', function () {
     before(function (done) {
         helpers.run(path.join(__dirname, '../backbone'))
             .inDir(path.join(os.tmpdir(), './temp-test/generator'))
-            .withArguments('name', '--force')
+            .withArguments('settings/emailIngestion')
             .withPrompts({
-                definePath: "scripts/views/test.js",
-                templatePath: "tmpl/views/test.html",
-                templateDomIds: "testTemplateId"
+                rootPath:"../newfolder"
             })
             .on('end', done);
     });
 
     it('creates files', function () {
         assert.file([
-            'scripts/views/test.js',
-            'tmpl/views/test.html'
+            'javascripts/views/settings/emailIngestion.js',
+            'tmpl/settings/emailIngestionTmpl.html'
         ]);
     });
 });

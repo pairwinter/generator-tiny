@@ -7,6 +7,7 @@ var util = require('util');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var handlebars = require('handlebars');
+var path = require('path');
 
 var TinyGenerator = yeoman.generators.NamedBase.extend({
     initializing: function () {
@@ -26,59 +27,44 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
         var prompts = [
             {
                 type: 'input',
-                name: 'definePath',
-                message: 'The file path that you place defined js.',
-                default: "scripts/view/test.js"
-            },
-            {
-                type: 'input',
-                name: 'definedAppName',
-                message: 'The defined js file has a appName. The default value is the js file name that get from definePath',
-                default: ""
-            },
-            {
-                type: 'input',
-                name: 'templatePath',
-                message: 'The file path that you place template js.',
-                default: "scripts/views/test.html"
-            },
-            {
-                type: 'input',
-                name: 'templateDomIds',
-                message: 'Generate the script chunk by template ids, the default value is the template file name that get from templatePath',
-                default: ""
+                name: 'rootPath',
+                message: 'The root path that you place defined js.',
+                default: this.destinationRoot()
             }
         ];
 
         this.prompt(prompts, function (props) {
-            var definePath = props.definePath;
-            if(/\.js$/.test(definePath)){
-                definePath = definePath.substring(0,definePath.length-3);
+            var rootPath = props.rootPath;
+            if(rootPath !== this.destinationRoot()){
+                rootPath = path.relative(this.destinationRoot(),rootPath);
             }
+            this.destinationRoot(rootPath);
+
+            /**
+             * build javascript file
+             */
+            var definePath = "views/" + this.name;
+            this.javascriptFilePath ="javascripts" + path.sep + definePath + ".js";
             //if not pass the definedAppName, then get it from definePath
-
-            if(!props.definedAppName){
-//                console.log(definePath);
-                var appName = definePath.match(/[^\/]+$/);
-                if(appName === null){
-                    props.definedAppName = definePath;
-                }else{
-                    props.definedAppName = appName[0];
-                }
-
+            var definedAppName = "";
+            var appName = definePath.match(/[^\/]+$/);
+            if(appName === null){
+                definedAppName = definePath;
+            }else{
+                definedAppName = appName[0];
             }
+            /**
+             * build template file
+             */
             //parse the template path
-            var templatePath = props.templatePath;
+            var templateFilePath = this.templateFilePath = "tmpl" + path.sep + this.name+"Tmpl.html";
             //if the template path is not end with .html, then append it.
-            if(!/\.html$/.test(templatePath)){
-                templatePath = templatePath + ".html"
-            }
-            var templateDomIds = props.templateDomIds;
+            var templateDomIds = "";
             //if not pass templateDomIds then get it from the template path.
             if(!templateDomIds){
-                var templateName = templatePath.match(/[^\/]+\.html$/);
+                var templateName = templateFilePath.match(/[^\/]+\.html$/);
                 if(templateName === null){
-                    templateName = templatePath;
+                    templateName = templateFilePath;
                 }
                 templateDomIds = [templateName[0].substring(0,templateName[0].length-5)];
             }else{
@@ -94,8 +80,8 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
 
             this.templateData = {
                 definePath : definePath,
-                definedAppName:props.definedAppName,
-                templatePath : templatePath,
+                definedAppName:definedAppName,
+                templatePath : templateFilePath,
                 templateDomIds : templateDomIds
             };
             done();
@@ -104,8 +90,8 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
     writing: function () {
         var jsFileContent = this.jsTemplate(this.templateData);
         var htmlFileContent = this.htmlTemplate(this.templateData);
-        this.write(this.templateData.definePath+".js",jsFileContent);
-        this.write(this.templateData.templatePath,htmlFileContent);
+        this.write(this.javascriptFilePath,jsFileContent);
+        this.write(this.templateFilePath,htmlFileContent);
     }
 });
 
