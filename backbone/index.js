@@ -82,7 +82,8 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                 definePath : definePath,
                 definedAppName:definedAppName,
                 templatePath : templateFilePath,
-                templateDomIds : templateDomIds
+                templateDomIds : templateDomIds,
+                model:true
             };
             done();
         }.bind(this));
