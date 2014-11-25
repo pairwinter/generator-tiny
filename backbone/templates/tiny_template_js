@@ -1,13 +1,13 @@
-;define('{{defineName}}',function(require, exports, module){
+;define('{{definePath}}',function(require, exports, module){
 
-    {{#if htmlTemplate}}
-	var template = require("{{htmlTemplate}}");
+    {{#if templatePath}}
+	var template = require("{{templatePath}}");
 	if(template !== true){
 		$('body').append(template);
 	}
 	{{/if}}
 
-    var {{appName}} = {
+    var {{definedAppName}} = {
         {{#if model}}
         Model: {
             defaults: function () {
@@ -27,13 +27,19 @@
             subApps: {},
             template: {},
             initialize: function () {
-                {{#if htmlTemplate}}
+            {{#if templatePath}}
                 $.templates({
-                    {{htmlTemplateId}}: $("#{{htmlTemplateId}}").html()
+                {{#each templateDomIds}}
+                    {{uniqueId}}: $("#{{uniqueId}}").html(){{#if @last}}{{else}},{{/if}}
+                {{/each}}
                 });
-                this.template.{{htmlTemplateId}} = $.render.{{htmlTemplateId}};
-                this.$el.html(this.template.{{htmlTemplateId}}(this.getIdSuffixModelJSON()));
+                {{#each templateDomIds}}
+                this.template.{{originalId}} = $.render.{{uniqueId}};
+                {{#if @first}}
+                this.$el.html(this.template.{{originalId}}(this.getIdSuffixModelJSON()));
                 {{/if}}
+                {{/each}}
+            {{/if}}
             },
             render: function () {
                 var view = this;
@@ -56,5 +62,5 @@
         }
     };
 
-    return {{appName}};
+    return {{definedAppName}};
 });

@@ -1,8 +1,10 @@
-<script type="text/x-jsrender" id="{{htmlTemplateId}}">
+{{#each templateDomIds}}
+<script type="text/x-jsrender" id="{{uniqueId}}">
 
 </script>
+{{/each}}
 <script type="text/javascript">
-   ;define("{{htmlTemplate}}",function(){
+   ;define("{{templatePath}}",function(){
        return true;
    });
 </script>

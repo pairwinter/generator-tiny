@@ -7,16 +7,22 @@ var helpers = require('yeoman-generator').test;
 var os = require('os');
 
 describe('tiny:backbone', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../backbone'))
-      .inDir(path.join(os.tmpdir(), './temp-test'))
-      .withArguments('name', '--force')
-      .on('end', done);
-  });
+    before(function (done) {
+        helpers.run(path.join(__dirname, '../backbone'))
+            .inDir(path.join(os.tmpdir(), './temp-test/generator'))
+            .withArguments('name', '--force')
+            .withPrompts({
+                definePath: "scripts/views/test.js",
+                templatePath: "tmpl/views/test.html",
+                templateDomIds: "testTemplateId"
+            })
+            .on('end', done);
+    });
 
-  it('creates files', function () {
-    assert.file([
-      'somefile.js'
-    ]);
-  });
+    it('creates files', function () {
+        assert.file([
+            'scripts/views/test.js',
+            'tmpl/views/test.html'
+        ]);
+    });
 });
