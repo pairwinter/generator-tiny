@@ -35,14 +35,17 @@
                 });
                 {{#each templateDomIds}}
                 this.template.{{originalId}} = $.render.{{uniqueId}};
+                {{/each}}
+            {{/if}}
+                this.render();
+            },
+            render: function () {
+                var view = this;
+                {{#each templateDomIds}}
                 {{#if @first}}
                 this.$el.html(this.template.{{originalId}}(this.getIdSuffixModelJSON()));
                 {{/if}}
                 {{/each}}
-            {{/if}}
-            },
-            render: function () {
-                var view = this;
             },
             events: function () {
                 var events = {
