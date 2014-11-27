@@ -37,7 +37,12 @@
                 this.template.{{originalId}} = $.render.{{uniqueId}};
                 {{/each}}
             {{/if}}
+                this.model.on('destroy',this.destroy,this);
                 this.render();
+            },
+            destroy:function(){
+                this.undelegateEvents();
+                //EB_Common.EventProxy.off('appName_eventName', this.listenToEvent, this);
             },
             render: function () {
                 var view = this;
