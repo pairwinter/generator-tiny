@@ -10,6 +10,7 @@ var handlebars = require('handlebars');
 var path = require('path');
 
 var TinyGenerator = yeoman.generators.NamedBase.extend({
+
     initializing: function () {
         this.log('You called the tiny subgenerator with the argument ' + this.name + '.');
 
