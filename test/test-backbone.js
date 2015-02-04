@@ -14,6 +14,7 @@ describe('tiny:backbone', function () {
             .withPrompts({
                 rootPath:"../newfolder",
                 moduleType:'grid',
+                formValidation:true,
                 templateScriptNames:''
             })
             .on('end', done);

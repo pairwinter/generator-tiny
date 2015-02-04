@@ -54,6 +54,12 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                 default:MODULE_TYPE
             },
             {
+                type: 'confirm',
+                name: 'formValidation',
+                message: 'Would you like add form validation?',
+                default:false
+            },
+            {
                 type: 'input',
                 name: 'templateScriptNames',
                 message: 'Do you want to create more then one script template name, if do join the name with [,]',
@@ -93,6 +99,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             this.templateData = {
                 isDialog:props.moduleType == 'dialog' || props.moduleType=='dialog-grid',
                 isGrid:props.moduleType == 'grid' || props.moduleType=='dialog-grid',
+                isFormValidation:props.formValidation,
                 definedName : definedName,
                 appVarName:this.baseFileName,
                 templatePath : this.templateFilePath,

@@ -5,7 +5,18 @@
         $('body').append(template);
     }
     {{/if}}
-
+    {{#if isFormValidation}}
+    /**
+    $.validator.addMethod("methodName",function(value,element){
+        if (this.optional(element)) {
+            return true;
+        }
+        var valid = false;
+        //todo
+        return valid;
+    }, i18n["error code"]);
+    **/
+    {{/if}}
     var {{appVarName}} = {
         {{#if model}}
         Model: {
@@ -40,7 +51,30 @@
                 {{#if isDialog}}
                 this.buildDialog();
                 {{/if}}
+                {{#if isFormValidation}}
+                this.jDom.form = this.$('#form');
+                EB_Common.validation.validate(this.jDom.form, {
+                    submitHandler: function () {
+                        view.formSubmit();
+                    }
+                });
+                {{/if}}
             },
+            {{#if isFormValidation}}
+            formSubmit:function(){
+                this.$("#saveButton").prop('disabled',true);
+                var view = this;
+                var url = "";
+                EB_Common.Ajax.post(url, {}, function (data) {
+                    view.$("#saveButton").prop('disabled',false);
+                    if (data.success === false) {
+                        EB_Common.dialog.alert(EB_Common.utils.i18n.parseJsonResult(data));
+                    } else {
+                        //todo
+                    }
+                }, "json");
+            },
+            {{/if}}
             {{#if isDialog}}
             buildDialog: function(){
                 var view = this;
