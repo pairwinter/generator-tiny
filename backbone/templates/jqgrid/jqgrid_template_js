@@ -1,0 +1,91 @@
+;define('{{definedName}}',function(require, exports, module){
+    {{#if templatePath}}
+	var template = require("{{templatePath}}");
+	if(template !== true){
+		$('body').append(template);
+	}
+	{{/if}}
+
+    var {{appVarName}} = {
+        {{#if model}}
+        Model: {
+            defaults: function () {
+                return {};
+            },
+            initialize: function (attributes, options) {},
+            parseData: function (data) {}
+        },
+        {{/if}}
+        View: {
+            initialize: function () {
+                this.templateScriptNames = {{templateScriptNamesJsonStr}};
+                EB_Common.Backbone.View.prototype.initialize.apply(this,arguments);
+                //EB_Common.EventProxy.on("eventName", callback, this);
+                this.render();
+            },
+            render: function () {
+                var view = this;
+                {{#each templateDomIds}}
+                {{#if @first}}
+                this.$el.html(this.template.{{originalId}}(this.getIdSuffixModelJSON()));
+                {{/if}}
+                {{/each}}
+                this.jDom.grid = this.$("#table");
+                this.jqgridData = [];
+                this.buildGrid();
+            },
+            buildGrid: function () {
+                var view = this;
+                var jqgridDefaultOptions = EB_Common.jqgrid.getJQGridDefaultOptions();
+                this.jDom.grid.jqGrid($.extend(jqgridDefaultOptions,{
+                    url: EB_Common.Ajax.wrapperUrl(""),
+                    afterInsertRow:function(rowid,rowdata,rowelem){
+                        //rowid is the id of the inserted row
+                        //rowdata is an array of the data to be inserted into the row. This is array of type name: value, where the name is a name from colModel
+                        //rowelem is the element from the response. If the data is xml this is the xml element of the row; if the data is json this is array containing all the data for the row
+                        var trDom = view.jDom.grid.getInd(rowid, true); //get the row element, it a object of document element but not a jquery object
+                        //todo
+                    },
+                    beforeSelectRow: function(rowid, e) {
+                        //rowid is the id of the row.
+                        //e is the event object
+                        var trDom = view.jDom.grid.getInd(rowid, true); //get the row element, it a object of document element but not a jquery object
+                        //todo
+                        return true;//true:select this row, false:not select this row.
+                    },
+                    onSelectRow:function(rowid,status){
+                        var trDom = view.jDom.grid.getInd(rowid, true); //get the row element, it a object of document element but not a jquery object
+                        //status - boolean variable determining the status of the header check box - true if checked, false if not checked.
+                    },
+                    onSelectAll:function(aRowids,status){
+                        //aRowids array of the selected rows (rowid's).
+                        //status - boolean variable determining the status of the header check box - true if checked, false if not checked.
+                    }
+                    loadComplete: function (dataPage) {
+                        if(dataPage && dataPage.data && dataPage.data.length){
+                            view.jqgridData = dataPage.data;
+                        }
+                        view.options.listLoadComplete && view.options.listLoadComplete(dataPage);
+                    }
+                });
+            },
+            events: function () {
+                var events = {
+                };
+                return this.dealEvents(events, this.cid);
+            },
+            getJsonData: function () {
+                var modelData = this.model.toJSON();
+            }
+
+        },
+        getInstance: function (container, model, parentApp, options) {
+            options = $.extend(true, {}, options || {});
+            var View = EB_Common.Backbone.View.extend(this.View);
+            model = model || new Backbone.Model();
+            return new View($.extend({ parentApp: parentApp, el: container, model: model },options||{}));
+        }
+    };
+
+    return {{appVarName}};
+});

@@ -5,6 +5,7 @@ To create the apps and the view templates with the user input arguments. save th
 The details information about generator please reference the website [Yeoman](http://yeoman.io).    
 #How does it work?
 In the environment of NodeJS, Yeoman, execute the shell command to build files.
+views,tmpl
 #Install
 ##It's a module of NodeJS, so you can execute the command to get it.  
     npm install tiny-generator
@@ -15,6 +16,13 @@ In the environment of NodeJS, Yeoman, execute the shell command to build files.
 #Usage
 ##1, post one parameter when execute `tiny:backbone`
     tiny:backbone appModuleName
+the appModuleName is name of the module that you created, it can be a path like this `folderParent/folderSub/modelName`   
+###eg.      
+    tiny:backbone settings/contact/profile (you don't need to add the suffix of the file)
+it will generate two files in the path of the root path(you should config the root path)
+
+*   rootPath/settings/contact/profileApp.js
+*   rootPath/tmpl/settings/contact/profileAppTmpl.html
 ##2, set the root path where you place the generated javascript and html files
 The root path that you place javascript and template file: the default value is the path of command executed\.
 

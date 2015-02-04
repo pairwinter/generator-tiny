@@ -12,15 +12,17 @@ describe('tiny:backbone', function () {
             .inDir(path.join(os.tmpdir(), './temp-test/generator'))
             .withArguments('settings/emailIngestion')
             .withPrompts({
-                rootPath:"../newfolder"
+                rootPath:"../newfolder",
+                moduleType:'grid',
+                templateScriptNames:''
             })
             .on('end', done);
     });
 
     it('creates files', function () {
         assert.file([
-            'javascripts/views/settings/emailIngestion.js',
-            'tmpl/settings/emailIngestionTmpl.html'
+            'javascripts/views/settings/emailIngestionApp.js',
+            'tmpl/settings/emailIngestionAppTmpl.html'
         ]);
     });
 });

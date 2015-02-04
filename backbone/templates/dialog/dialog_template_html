@@ -1,0 +1,10 @@
+{{#each templateScriptNames}}
+<script type="text/x-jsrender" id="{{templateId}}">
+
+</script>
+{{/each}}
+<script type="text/javascript">
+   ;define("{{templatePath}}",function(){
+       return true;
+   });
+</script>
