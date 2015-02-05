@@ -29,7 +29,7 @@
         {{/if}}
         View: {
             initialize: function () {
-                this.templateScriptNames = {{templateScriptNamesJsonStr}};
+                this.templateScriptNames = {{{templateScriptNamesJsonStr}}};
                 EB_Common.Backbone.View.prototype.initialize.apply(this,arguments);
                 //EB_Common.EventProxy.on("eventName", callback, this);
                 this.render();
@@ -38,7 +38,7 @@
                 var view = this;
                 {{#each templateScriptNames}}
                 {{#if @first}}
-                this.$el.html(this.template.{{templateId}}(this.getIdSuffixModelJSON()));
+                this.$el.html(this.template.{{templateName}}(this.getIdSuffixModelJSON()));
                 {{/if}}
                 {{/each}}
                 {{#if isGrid}}
@@ -141,14 +141,14 @@
                     onSelectAll:function(aRowids,status){
                         //aRowids array of the selected rows (rowid's).
                         //status - boolean variable determining the status of the header check box - true if checked, false if not checked.
-                    }
+                    },
                     loadComplete: function (dataPage) {
                         if(dataPage && dataPage.data && dataPage.data.length){
                             view.jqgridData = dataPage.data;
                         }
                         view.options.listLoadComplete && view.options.listLoadComplete(dataPage);
                     }
-                });
+                }));
             },
             {{/if}}
             events: function () {
