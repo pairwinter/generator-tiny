@@ -70,8 +70,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             {
                 type: 'input',
                 name: 'templateScriptNames',
-                message: 'Do you want to create more then one script template name, if do join the name with ,',
-                default: ""
+                message: 'Do you want to create more then one script template name, if do join the name with ,'
             }
         ];
         if(this.options.delete){

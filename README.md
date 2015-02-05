@@ -22,10 +22,20 @@ the appModuleName is name of the module that you created, it can be a path like 
 it will generate two files in the path of the root path(you should config the root path)
 
 *   rootPath/settings/contact/profileApp.js
-*   rootPath/tmpl/settings/contact/profileAppTmpl.html
-##2, set the root path where you place the generated javascript and html files
-The root path that you place javascript and template file: the default value is the path of command executed\.
+*   rootPath/tmpl/settings/contact/profileAppTmpl.html  
 
+##2, set the root path where you place the generated javascript and html files
+The root path that you place javascript and template file: the default value is the path of command executed.
+##3, select the type of code that you want to use   
+*   standard
+*   dialog
+*   grid
+*   dialog-grid
+
+##4, do you want to add form validation code?
+
+##5, delete the files that you just created with the option --delete
+`tiny:backbone appModuleName --delete`, this will delete the files that you created.  
 #maintainability
 Add the generator templates by the requirements of Project.
     
