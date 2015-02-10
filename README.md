@@ -38,6 +38,12 @@ The root path that you place javascript and template file: the default value is 
 `tiny:backbone appModuleName --delete`, this will delete the files that you created.  
 #maintainability
 Add the generator templates by the requirements of Project.
+
+
+## Release Histor
+
+2015-2-5       v0.2.4      add the delete option to delete the files that created.
+
     
     
     

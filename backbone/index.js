@@ -71,6 +71,11 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                 type: 'input',
                 name: 'templateScriptNames',
                 message: 'Do you want to create more then one script template name, if do join the name with ,'
+            },
+            {
+                type: 'input',
+                name: 'testFiles',
+                message: 'if you want to create the test files please input the path'
             }
         ];
         if(this.options.delete){
@@ -81,8 +86,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                     message: 'The root path that you process files?',
                     store: true,
                     default: this.destinationRoot()
-                },
-                {
+                }, {
                     type: 'confirm',
                     name: 'delete',
                     message: 'Are you confirm to delete the files',
@@ -96,6 +100,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                 rootPath = path.relative(this.destinationRoot(), rootPath);
             }
             this.destinationRoot(rootPath);
+
             var definedName = "views" + path.sep + this.fileDirPath + path.sep + this.baseFileName;
             this.javascriptFilePath = "javascripts" + path.sep + definedName + ".js";
             var primaryTemplateName = this.baseFileName + 'Tmpl';
@@ -134,6 +139,17 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                     templateScriptNamesJsonStr: JSON.stringify(templateScriptNames),
                     model: true
                 };
+                if(props.testFilePath){
+                    var testFilePath =  props.testFilePath;
+                    testFilePath = path.relative(this.destinationRoot(), testFilePath);
+                    this.developTestJsPath = "app" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "Test.html";
+                    this.developTestHtmlPath = "app" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "Test.html";
+                    this.developTestModelData = {
+                        definedName:definedName,
+                        appVarName:this.baseFileName,
+                        containerId:this.baseFileName + "Container"
+                    }
+                }
             }
             done();
         }.bind(this));
