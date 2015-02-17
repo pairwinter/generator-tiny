@@ -1,0 +1,17 @@
+describe('load app {{definedName}}',function(){
+    var expect = chai.expect,should =chai.should();
+    it('Get the defined module',function(down){
+        seajs.use('{{definedName}}',function({{appVarName}}){
+            {{appVarName}}.should.be.a('object');
+            down();
+        });
+    });
+    it('Create the instance of the defined module',function(down){
+        seajs.use('{{definedName}}',function({{appVarName}}){
+            var instance = {{appVarName}}.getInstance($('<div></div>'));
+            expect(instance).to.be.a('object');
+            instance.should.be.a('object');
+            expect(instance.model.toJSON()).to.be.a('object');
+        });
+    });
+});

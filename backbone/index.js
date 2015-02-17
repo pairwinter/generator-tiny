@@ -38,6 +38,10 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             this.log(chalk.green.bold('You are creating the files: ' + [baseFileName+".js",baseFileName+"Tmpl.html"].join(',')));
             this.jsTemplate = handlebars.compile(this.read("template_js"));
             this.htmlTemplate = handlebars.compile(this.read("template_html"));
+
+            this.developAppHtmlTemplate = handlebars.compile(this.read('develop/app/develop_app_html'));
+            this.endToEndTestTemplate = handlebars.compile(this.read('develop/test/endToEndTest/endToEnd_js'));
+            this.unitTestTemplate = handlebars.compile(this.read('develop/test/unitTest/unitTest_js'));
         }
     },
     prompting: function () {
@@ -49,8 +53,8 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
         var prompts = [
             {
                 type: 'input',
-                name: 'rootPath',
-                message: 'The root path that you place javascript and template files.',
+                name: 'resourcesPath',
+                message: 'The resources path that you place javascript and template files.',
                 store: true,
                 default: this.destinationRoot()
             },
@@ -74,16 +78,17 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             },
             {
                 type: 'input',
-                name: 'testFiles',
-                message: 'if you want to create the test files please input the path'
+                name: 'testingPath',
+                message: 'The root path that you place the files that for your testing.',
+                default: this.destinationRoot()
             }
         ];
         if(this.options.delete){
             prompts =  [
                 {
                     type: 'input',
-                    name: 'rootPath',
-                    message: 'The root path that you process files?',
+                    name: 'resourcesPath',
+                    message: 'The resources path that you process files?',
                     store: true,
                     default: this.destinationRoot()
                 }, {
@@ -95,12 +100,16 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
             ];
         }
         this.prompt(prompts, function (props) {
-            var rootPath = props.rootPath;
-            if (rootPath !== this.destinationRoot()) {
-                rootPath = path.relative(this.destinationRoot(), rootPath);
+            var resourcesPath = props.resourcesPath;
+            if (resourcesPath !== this.destinationRoot()) {
+                resourcesPath = path.relative(this.destinationRoot(), resourcesPath);
+                this.resourcesPath = resourcesPath;
             }
-            this.destinationRoot(rootPath);
-
+            var testingPath = props.testingPath;
+            if (testingPath !== this.destinationRoot()) {
+                testingPath = path.relative(this.destinationRoot(), testingPath);
+                this.testingPath = testingPath;
+            }
             var definedName = "views" + path.sep + this.fileDirPath + path.sep + this.baseFileName;
             this.javascriptFilePath = "javascripts" + path.sep + definedName + ".js";
             var primaryTemplateName = this.baseFileName + 'Tmpl';
@@ -139,16 +148,17 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
                     templateScriptNamesJsonStr: JSON.stringify(templateScriptNames),
                     model: true
                 };
-                if(props.testFilePath){
-                    var testFilePath =  props.testFilePath;
-                    testFilePath = path.relative(this.destinationRoot(), testFilePath);
-                    this.developTestJsPath = "app" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "Test.html";
-                    this.developTestHtmlPath = "app" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "Test.html";
-                    this.developTestModelData = {
-                        definedName:definedName,
-                        appVarName:this.baseFileName,
-                        containerId:this.baseFileName + "Container"
-                    }
+                //process testing files
+                this.unitTestPath = "test" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "-unitTest.js";
+                this.endToEndTestPath = "test" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "-endToEndTest.js";
+                this.developTestHtmlPath = "app" + path.sep + this.fileDirPath + path.sep + this.baseFileName + "Test.html";
+                var requireToolsRelativePath = path.relative('/app/' + this.fileDirPath,'/tools');
+                this.developTestModelData = {
+                    definedName:definedName,
+                    appVarName:this.baseFileName, //unitTestPath used
+                    containerId:this.baseFileName + "Container", //used by develop_app_html
+                    developAppHtmlPath : this.fileDirPath + path.sep + this.baseFileName + "Test.html",//used by endToEnd_js
+                    requireToolsRelativePath :requireToolsRelativePath
                 }
             }
             done();
@@ -156,15 +166,21 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
     },
     writing: function () {
         if(this.options.delete){
-            rimraf(this.javascriptFilePath,function(){});
-            rimraf(this.templateFilePath,function(){});
+            rimraf(this.resourcesPath + path.sep + this.javascriptFilePath,function(){});
+            rimraf(this.resourcesPath + path.sep + this.templateFilePath,function(){});
         }else{
             var jsFileContent = this.jsTemplate(this.templateData);
             var htmlFileContent = this.htmlTemplate(this.templateData);
-            this.write(this.javascriptFilePath, jsFileContent);
-            this.write(this.templateFilePath, htmlFileContent);
+            this.write(this.resourcesPath + path.sep + this.javascriptFilePath, jsFileContent);
+            this.write(this.resourcesPath + path.sep + this.templateFilePath, htmlFileContent);
+            // testing files!
+            this.write(this.testingPath + path.sep + this.developTestHtmlPath, this.developAppHtmlTemplate(this.developTestModelData));
+            this.write(this.testingPath + path.sep + this.unitTestPath, this.unitTestTemplate(this.developTestModelData));
+            this.write(this.testingPath + path.sep + this.endToEndTestPath, this.endToEndTestTemplate(this.developTestModelData));
         }
     }
 });
+
+
 
 module.exports = TinyGenerator;

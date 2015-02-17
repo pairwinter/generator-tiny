@@ -24,8 +24,8 @@ it will generate two files in the path of the root path(you should config the ro
 *   rootPath/settings/contact/profileApp.js
 *   rootPath/tmpl/settings/contact/profileAppTmpl.html  
 
-##2, set the root path where you place the generated javascript and html files
-The root path that you place javascript and template file: the default value is the path of command executed.
+##2, set the resources path where you place the generated javascript and html files
+The resources path that you place javascript and template file: the default value is the path of command executed.
 ##3, select the type of code that you want to use   
 *   standard
 *   dialog
@@ -33,6 +33,12 @@ The root path that you place javascript and template file: the default value is 
 *   dialog-grid
 
 ##4, do you want to add form validation code?
+
+##5, The root path that you place the files that for your testing.
+we will generate 3 files for testing
+1, testingRootPath/app/settings/contact/profileAppTest.html, if you use the grunt serve to open this file, this file will show the usage of the new created app.
+2, testingRootPath/test/settings/contact/profileApp-unitTest.js
+3, testingRootPath/test/settings/contact/profileApp-endToEndTest.js 
 
 ##5, delete the files that you just created with the option --delete
 `tiny:backbone appModuleName --delete`, this will delete the files that you created.  

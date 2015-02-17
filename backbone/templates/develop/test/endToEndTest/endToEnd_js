@@ -1,0 +1,17 @@
+var expect = require('chai').expect;
+var by = require('selenium-webdriver').By;
+var everbridgeWebDriverTool  = require('{{requireToolsRelativePath}}/everbridgeWebDriverTool')();
+var broswer = everbridgeWebDriverTool.buildChromeDriver();
+describe('Go to test {{developAppHtmlPath}}',function(){
+    it('should be the index page',function(done){
+        this.timeout(100000);
+        //expect(title).to.be.a('string');
+        broswer.get('http://localhost:9000/{{developAppHtmlPath}}')
+            .then(function(){
+                return everbridgeWebDriverTool.writeScreenshot();
+            }).then(function(){
+                broswer.quit();
+                done();
+            });
+    });
+});
