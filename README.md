@@ -40,14 +40,17 @@ we will generate 3 files for testing
 2, testingRootPath/test/settings/contact/profileApp-unitTest.js
 3, testingRootPath/test/settings/contact/profileApp-endToEndTest.js 
 
-##5, delete the files that you just created with the option --delete
+##6, delete the files that you just created with the option --delete
 `tiny:backbone appModuleName --delete`, this will delete the files that you created.  
+##7, Only generate testing files for existed files.
+`tiny:backbone appModuleName --testonly`, this will generate the testing files for the existed module apps.
 #maintainability
 Add the generator templates by the requirements of Project.
 
 
 ## Release Histor
 
+2015-2-22       v0.2.7     add the testonly option to create the testing files for the existed apps.
 2015-2-5       v0.2.4      add the delete option to delete the files that created.
 
     

@@ -10,19 +10,17 @@ describe('tiny:backbone', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../backbone'))
       .inDir('/Users/damon/Documents/TestData/generator/testing')
-      .withArguments('settings/emailIngestion')
+      .withArguments('settings/emailIngestion --delete')
       .withPrompts({
         resourcesPath: "./resources",
-        moduleType: 'grid',
-        formValidation: true,
-        templateScriptNames: '',
-        testingPath: './develop'
+        delete: true,
+        deleteTesting: true
       })
       .on('end', done);
   });
 
-  it('creates files', function () {
-    assert.file([
+  it('delete files', function () {
+    assert.noFile([
       'resources/javascripts/views/settings/emailIngestionApp.js',
       'resources/tmpl/settings/emailIngestionAppTmpl.html',
       'develop/app/settings/emailIngestionAppTest.html',
