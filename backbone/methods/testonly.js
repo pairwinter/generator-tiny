@@ -9,6 +9,7 @@ var yosay = require('yosay');
 var handlebars = require('handlebars');
 var path = require('path');
 var rimraf = require('rimraf');
+var open = require('open');
 var MODULE_TYPE = 'standard';
 var MATCH_NAME = /([\w\-]+)(\.js)?$/;
 var MATCH_TEPLATE_NAMES = /^([,\w\-]+)$/;
@@ -55,6 +56,12 @@ var methods = {
     this.write(this.absoluteDevelopTestHtmlPath, this.developAppHtmlTemplate(this.developTestModelData));
     this.write(this.absoluteUnitTestPath, this.unitTestTemplate(this.developTestModelData));
     this.write(this.absoluteEndToEndTestHtmlPath, this.endToEndTestTemplate(this.developTestModelData));
+
+    var url = 'http://localhost:9000/' + this.fileDirPath + sep + this.baseFileName + 'Test.html';
+    this.log(chalk.blue.bgYellow('Please add blow url to the associate module of develop index.html : '));
+    this.log(chalk.blue.bold.bgYellow(url));
+    this.log(chalk.black.bold.bgCyan('And make sure the html files could be found by tiny_layout task!'))
+    //open(url,function(){});
   }
 };
 var testOnlyMethod = function(){};
