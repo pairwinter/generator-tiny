@@ -1,12 +1,16 @@
+/**
+ * http://chaijs.com/api/
+ * To get the information of expect | should | assert
+ */
 describe('load app {{definedName}}',function(){
     var expect = chai.expect,should =chai.should();
-    it('Get the defined module',function(down){
+    it('Get the defined module {{definedName}}',function(down){
         seajs.use('{{definedName}}',function({{appVarName}}){
             {{appVarName}}.should.be.a('object');
             down();
         });
     });
-    it('Create the instance of the defined module',function(down){
+    it('Create the instance of the defined module {{definedName}}',function(down){
         seajs.use('{{definedName}}',function({{appVarName}}){
             var instance = {{appVarName}}.getInstance($('<div></div>'));
             expect(instance).to.be.a('object');
