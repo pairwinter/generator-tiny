@@ -17,7 +17,6 @@ var testonlyMethod = new (require('./testonly'));
 var methods = {
   initializing:function(){
     var baseFileName = this.baseFileName;
-    this.log(chalk.blue.bold('You are deleting the files: ' + [baseFileName+".js",baseFileName+"Tmpl.html"].join(',')));
   },
   buildPrompts:function(){
     return [{
@@ -25,22 +24,22 @@ var methods = {
       name: 'resourcesPath',
       message: 'The resources path that you process files?',
       store: true,
-      default: this.destinationRoot()
+      default: './resources'
     },{
       type: 'confirm',
       name: 'delete',
       message: 'Are you confirm to delete the files',
       default: false
     },{
-      type: 'confirm',
-      name: 'deleteTesting',
-      message: 'Do you want to delete the associated testing files?',
-      default: false
+      type: 'input',
+      name: 'testingPath',
+      message: 'If you want to delete the associated testing files please input the path, current path please input [./]',
+      default: './develop'
     }];
   },
   promptProcess:function(props){
     var isDelete = this.isDelete = props.delete;
-    var isDeleteTesting = this.isDeleteTesting = props.deleteTesting;
+    this.testingPath = props.testingPath;
     if(!isDelete){
       process.exit();
     }
@@ -49,8 +48,7 @@ var methods = {
     defaultMethod.buildFilesPath.apply(this);
     rimraf(this.absoluteJavascriptFilePath,function(){});
     rimraf(this.absoluteTemplateFilePath,function(){});
-    this.log(this.isDeleteTesting);
-    if(this.isDeleteTesting){
+    if(this.testingPath){
       testonlyMethod.buildFilesPath.apply(this);
       rimraf(this.absoluteDevelopTestHtmlPath,function(){});
       rimraf(this.absoluteUnitTestPath,function(){});

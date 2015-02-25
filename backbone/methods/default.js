@@ -26,7 +26,7 @@ var methods = {
         name: 'resourcesPath',
         message: 'The resources path that you place javascript and template files.',
         store: true,
-        default: this.destinationRoot()
+        default: './resources'
       },
       {
         type: 'list',
@@ -50,7 +50,7 @@ var methods = {
         type: 'input',
         name: 'testingPath',
         message: 'The root path that you place the files that for your testing.',
-        default: this.destinationRoot()
+        default: './develop'
       }
     ];
   },

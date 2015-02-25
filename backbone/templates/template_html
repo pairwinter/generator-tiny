@@ -1,6 +1,6 @@
 {{#each templateScriptNames}}
 <script type="text/x-jsrender" id="{{templateId}}">
-
+  This content if from {{../templatePath}} and template id is {{templateId}}!
 </script>
 {{/each}}
 <script type="text/javascript">

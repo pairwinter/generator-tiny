@@ -18,7 +18,6 @@ var sep = path.sep;
 var methods = {
   initializing:function(){
     var baseFileName = this.baseFileName;
-    this.log(chalk.green.bold('You are creating the files: ' + [baseFileName+".js",baseFileName+"Tmpl.html"].join(',')));
     this.developAppHtmlTemplate = handlebars.compile(this.read('develop/app/develop_app_html'));
     this.endToEndTestTemplate = handlebars.compile(this.read('develop/test/endToEndTest/endToEnd_js'));
     this.unitTestTemplate = handlebars.compile(this.read('develop/test/unitTest/unitTest_js'));
@@ -29,7 +28,7 @@ var methods = {
         type: 'input',
         name: 'testingPath',
         message: 'The root path that you place the files that for your testing.',
-        default: this.destinationRoot()
+        default: './develop'
       }
     ];
   },
@@ -59,10 +58,9 @@ var methods = {
     this.write(this.absoluteEndToEndTestHtmlPath, this.endToEndTestTemplate(this.developTestModelData));
 
     var url = 'http://localhost:9000/' + this.fileDirPath + sep + this.baseFileName + 'Test.html';
-    this.log(chalk.blue.bgYellow('Please add blow url to the associate module of develop index.html : '));
-    this.log(chalk.blue.bold.bgYellow(url));
+    this.log(chalk.blue.bgYellow('Please add blow url to the associate module of develop index.html : ') + chalk.blue.bold.bgYellow(url));
     this.log(chalk.black.bold.bgCyan('And make sure the html files could be found by tiny_layout task!'))
-    //open(url,function(){});
+    open(url,function(){});
   }
 };
 var testOnlyMethod = function(){};
