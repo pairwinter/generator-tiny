@@ -48,6 +48,7 @@ var methods = {
       definedName:this.definedName,
       appVarName:this.baseFileName, //unitTestPath used
       containerId:this.baseFileName + "Container", //used by develop_app_html
+      fileDirPath: this.fileDirPath,
       developAppHtmlPath : this.fileDirPath + sep + this.baseFileName + "Test.html",//used by endToEnd_js
       requireToolsRelativePath :requireToolsRelativePath
     }

@@ -1,17 +1,21 @@
-var expect = require('chai').expect;
-var by = require('selenium-webdriver').By;
-var everbridgeWebDriverTool  = require('{{requireToolsRelativePath}}/everbridgeWebDriverTool')();
-var broswer = everbridgeWebDriverTool.buildChromeDriver();
-describe('Go to test {{developAppHtmlPath}}',function(){
-    it('should be the index page',function(done){
+var test = require('selenium-webdriver/testing');
+var assert = require('selenium-webdriver/testing/assert');
+var tool  = require('{{requireToolsRelativePath}}/everbridgeWebDriverTool')('{{fileDirPath}}');
+var driver = everbridgeWebDriverTool.buildChromeDriver();
+/**
+ * assert usage document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_testing_Assertion.html
+ * assert(name).equalTo(otherName);
+ * webdriver WebElement document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_WebElement.html
+ * webelement.click();
+ */
+test.describe('Go to test {{developAppHtmlPath}}',function(){
+    test.it('should be the index page',function(done){
         this.timeout(100000);
-        //expect(title).to.be.a('string');
-        broswer.get('http://localhost:9000/{{developAppHtmlPath}}')
+        driver.get(tool.wrap('{{developAppHtmlPath}}'))
             .then(function(){
-                return everbridgeWebDriverTool.writeScreenshot();
+                tool.writeScreenshot();
             }).then(function(){
                 broswer.quit();
-                done();
             });
     });
 });
