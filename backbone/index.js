@@ -86,7 +86,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
   },
   writing: function () {
     if (this.options.delete) {
-      //deleteMethod.writting.apply(this);
+      deleteMethod.writting.apply(this);
     } else if (this.options.testonly) {
       testonlyMethod.writing.apply(this);
     } else {
