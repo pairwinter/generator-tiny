@@ -1,7 +1,7 @@
 var test = require('selenium-webdriver/testing');
 var assert = require('selenium-webdriver/testing/assert');
 var tool  = require('{{requireToolsRelativePath}}/everbridgeWebDriverTool')('{{fileDirPath}}');
-var driver = everbridgeWebDriverTool.buildChromeDriver();
+var driver = tool.buildDriver();
 /**
  * assert usage document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_testing_Assertion.html
  * assert(name).equalTo(otherName);
@@ -9,8 +9,7 @@ var driver = everbridgeWebDriverTool.buildChromeDriver();
  * webelement.click();
  */
 test.describe('Go to test {{developAppHtmlPath}}',function(){
-    test.it('should be the index page',function(){
-        this.timeout(100000);
+    test.it('Testing {{developAppHtmlPath}}',function(){
         driver.get(tool.wrap('{{developAppHtmlPath}}'))
             .then(function(){
                 tool.writeScreenshot();

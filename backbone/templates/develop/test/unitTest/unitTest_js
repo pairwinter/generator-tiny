@@ -3,7 +3,7 @@
  * To get the information of expect | should | assert
  */
 describe('load app {{definedName}}',function(){
-    var expect = chai.expect,should =chai.should();
+    var assert = chai.assert, expect = chai.expect, should =chai.should();
     it('Get the defined module {{definedName}}',function(done){
         seajs.use('{{definedName}}',function({{appVarName}}){
             {{appVarName}}.should.be.a('object');
