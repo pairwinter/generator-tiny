@@ -9,13 +9,13 @@ var driver = everbridgeWebDriverTool.buildChromeDriver();
  * webelement.click();
  */
 test.describe('Go to test {{developAppHtmlPath}}',function(){
-    test.it('should be the index page',function(done){
+    test.it('should be the index page',function(){
         this.timeout(100000);
         driver.get(tool.wrap('{{developAppHtmlPath}}'))
             .then(function(){
                 tool.writeScreenshot();
             }).then(function(){
-                broswer.quit();
+                driver.quit();
             });
     });
 });

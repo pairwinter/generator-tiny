@@ -4,18 +4,19 @@
  */
 describe('load app {{definedName}}',function(){
     var expect = chai.expect,should =chai.should();
-    it('Get the defined module {{definedName}}',function(down){
+    it('Get the defined module {{definedName}}',function(done){
         seajs.use('{{definedName}}',function({{appVarName}}){
             {{appVarName}}.should.be.a('object');
-            down();
+            done();
         });
     });
-    it('Create the instance of the defined module {{definedName}}',function(down){
+    it('Create the instance of the defined module {{definedName}}',function(done){
         seajs.use('{{definedName}}',function({{appVarName}}){
             var instance = {{appVarName}}.getInstance($('<div></div>'));
             expect(instance).to.be.a('object');
             instance.should.be.a('object');
             expect(instance.model.toJSON()).to.be.a('object');
+            done();
         });
     });
 });
