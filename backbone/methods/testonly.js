@@ -59,8 +59,8 @@ var methods = {
 
     var url = 'http://localhost:9000/' + this.fileDirPath + sep + this.baseFileName + 'Test.html';
     this.log(chalk.blue.bgYellow('Please add blow url to the associate module of develop index.html : ') + chalk.blue.bold.bgYellow(url));
-    this.log(chalk.black.bold.bgCyan('And make sure the html files could be found by tiny_layout task!'))
-    open(url,function(){});
+    this.log(chalk.black.bold.bgCyan('And make sure the html files could be found by tiny_layout task!'));
+    //open(url,function(){});
   }
 };
 var testOnlyMethod = function(){};
