@@ -44,6 +44,8 @@ var methods = {
     methods.buildFilesPath.apply(this);
     var requireToolsRelativePath = path.relative('/app/' + this.fileDirPath,'/tools');
     this.developTestModelData = {
+      unitTestPath:this.unitTestPath,
+      endToEndTestPath:this.endToEndTestPath,
       definedName:this.definedName,
       appVarName:this.baseFileName, //unitTestPath used
       containerId:this.baseFileName + "Container", //used by develop_app_html

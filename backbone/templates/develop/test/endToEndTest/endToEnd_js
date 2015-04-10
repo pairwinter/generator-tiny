@@ -8,8 +8,8 @@ var driver = tool.buildDriver();
  * webdriver WebElement document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_WebElement.html
  * webelement.click();
  */
-test.describe('Go to test {{developAppHtmlPath}}',function(){
-    test.it('Testing {{developAppHtmlPath}}',function(){
+test.describe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
+    test.it('Testing {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
         driver.get(tool.wrap('{{developAppHtmlPath}}'))
             .then(function(){
                 tool.writeScreenshot();

@@ -2,7 +2,7 @@
  * http://chaijs.com/api/
  * To get the information of expect | should | assert
  */
-describe('load app {{definedName}}',function(){
+describe('load app {{definedName}} in {{unitTestPath}}',function(){
     var assert = chai.assert, expect = chai.expect, should =chai.should();
     it('Get the defined module {{definedName}}',function(done){
         seajs.use('{{definedName}}',function({{appVarName}}){
@@ -10,7 +10,7 @@ describe('load app {{definedName}}',function(){
             done();
         });
     });
-    it('Create the instance of the defined module {{definedName}}',function(done){
+    it('Create the instance of the defined module {{definedName}} in {{unitTestPath}}',function(done){
         seajs.use('{{definedName}}',function({{appVarName}}){
             var instance = {{appVarName}}.getInstance($('<div></div>'));
             expect(instance).to.be.a('object');
