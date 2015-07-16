@@ -161,11 +161,15 @@
             }
 
         },
-        getInstance: function (container, model, parentApp, options) {
-            options = $.extend(true, {}, options || {});
+        getInstance: function (container, modelData, parentApp, options) {
             var View = EB_Common.Backbone.View.extend(this.View);
-            model = model || new Backbone.Model();
-            return new View($.extend({ parentApp: parentApp, el: container, model: model },options||{}));
+            var Model = Backbone.Model.extend(this.Model);
+            var model = new Model(modelData || {});
+            var view = new View($.extend({ parentApp: parentApp, model: model },options||{}));
+            if(container){
+                container.append(view.$el);
+            }
+            return view;
         }
     };
 
