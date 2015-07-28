@@ -75,7 +75,6 @@ module.exports = yeoman.generators.Base.extend({
         this.log(chalk.blue('prompt testingPath2: %s'),testingPath);
         this.testingPath = testingPath;
       }
-
       this.definedName = "views" + path.sep + this.fileDirPath + path.sep + this.baseFileName;
       this.log(chalk.blue('prompt definedName: %s'),testingPath);
       if (this.options.delete) {
@@ -90,7 +89,6 @@ module.exports = yeoman.generators.Base.extend({
       done();
     }.bind(this));
   },
-
   writing: function () {
     if (this.options.delete) {
       deleteMethod.writting.apply(this);
