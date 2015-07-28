@@ -1,0 +1,111 @@
+;define('{{definedName}}',function(require,exports, module) {
+    var React = require('react');
+    var Backbone = require('backbone');
+    var HelloForm = React.createClass({
+          handlePost:function(e){
+              var myName = this.refs.myName.getDOMNode().value.trim();
+              var myLocation = this.refs.myLocation.getDOMNode().value.trim();
+              if (!myName||!myLocation){
+                  return;
+              }
+              this.props.onPost({name:myName,location:myLocation});
+              this.refs.myName.getDOMNode().value='';
+              this.refs.myLocation.getDOMNode().value='';
+              return;
+          },
+          handleUpdate:function(e){
+              var myName = this.refs.myName.getDOMNode().value.trim();
+              var myLocation = this.refs.myLocation.getDOMNode().value.trim();
+              if (!myName||!myLocation){
+                  return;
+              }
+              this.props.onUpdate({name:myName,location:myLocation});
+              this.refs.myName.getDOMNode().value='';
+              this.refs.myLocation.getDOMNode().value='';
+              return;
+          },
+          render: function () {
+              return (
+                  <div>
+                      <form>
+                          <input type="text" ref="myName" />
+                          <input type="text" ref="myLocation" />
+                          <input type="button" value="Post" onClick={this.handlePost} />
+                          <input type="button" value="Update" onClick={this.handleUpdate} />
+                      </form>
+                  </div>
+              );
+          }
+      });
+      var HelloInfo = React.createClass({
+          render: function () {
+              return (
+                  <div>
+                      <div>Hello,{this.props.data.get("name")},I am in {this.props.data.get("location")}</div>
+                  </div>
+              );
+          }
+      });
+      var BackboneMixin = {
+          componentDidMount: function () {
+              this.getBackboneModel().bind('change', this.forceUpdate.bind(this, null));
+          },
+          componentWillUnmount: function () {
+              this.getBackboneModel().unbind(null, null, this);
+          }
+      };
+      /*var BackboneMixin = {
+          componentDidMount: function () {
+              // Whenever there may be a change in the Backbone data, trigger a
+              // reconcile.
+              this.getBackboneCollections().forEach(function (collection) {
+                  // explicitly bind `null` to `forceUpdate`, as it demands a callback and
+                  // React validates that it's a function. `collection` events passes
+                  // additional arguments that are not functions
+                  collection.on('add remove change', this.forceUpdate.bind(this, null));
+              }, this);
+          },
+
+          componentWillUnmount: function () {
+              // Ensure that we clean up any dangling references when the component is
+              // destroyed.
+              this.getBackboneCollections().forEach(function (collection) {
+                  collection.off(null, null, this);
+              }, this);
+          }
+      };*/
+      var HelloComponents = React.createClass({
+          mixins: [BackboneMixin],
+          getBackboneModel: function () {
+              return this.props.data;
+          },
+          handleUpdate:function(newInfo){
+              this.props.data.set(newInfo);
+              return;
+          },
+          handlePost:function(newInfo){
+              this.props.data.set(newInfo);
+              this.props.onGetJsonData(this.props.data);
+              return;
+          },
+          render: function () {
+              return (
+                  <div>
+                      <HelloInfo data={this.props.data}/>
+                      <HelloForm onUpdate={this.handleUpdate} onPost={this.handlePost} />
+                  </div>
+              );
+          }
+    });
+    var {{appVarName}}={
+        getJsonData:function(data){
+            alert(data.get("name")+","+data.get("location"));
+        },
+        getInstance:function(model,options){
+            var modelData = new Backbone.Model(model);
+            React.render(<HelloComponents data={modelData} onGetJsonData={this.getJsonData} />,
+              document.getElementById('{{appVarName}}Container'));
+        }
+    };
+    return {{appVarName}};
+});

@@ -1,0 +1,22 @@
+/**
+ * http://chaijs.com/api/
+ * To get the information of expect | should | assert
+ */
+describe('load app {{definedName}} in {{unitTestPath}}',function(){
+    var assert = chai.assert, expect = chai.expect, should =chai.should();
+    var app = null;
+    before(function(done){
+        var container = $('<div></div>').appendTo('body');
+        var model = new Backbone.Model();
+        seajs.use('{{definedName}}',function({{appVarName}}){
+            app = {{appVarName}}.getInstance(container,model);
+            done();
+        });
+    });
+    it('Test the instance of the defined module {{definedName}} in {{unitTestPath}}',function(done){
+        expect(app).to.be.a('object');
+        app.should.be.a('object');
+        expect(app.model.toJSON()).to.be.a('object');
+        done();
+    });
+});
