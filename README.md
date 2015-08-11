@@ -1,4 +1,4 @@
-#This generator is only used by myself, and the function is very poor, please not install!   
+#This generator is only used by myself, and the function is very poor, please do not install!   
 #What is it?    
 A generator of Yo and a tool that based on NodeJS      
 To create the apps and the view templates with the user input arguments. save the time for developer to develop new feature.        
