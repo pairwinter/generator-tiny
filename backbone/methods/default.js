@@ -57,9 +57,11 @@ var methods = {
   buildFilesPath:function(){
     this.javascriptFilePath = "javascripts" + sep + this.definedName + ".js";
     this.primaryTemplateName = this.baseFileName + 'Tmpl';
-    this.templateFilePath = "tmpl" + sep + this.fileDirPath + sep + this.primaryTemplateName + ".html";
+    //comment this line, change template folder to the js file folder.
+    //this.templateFilePath = "tmpl" + sep + this.fileDirPath + sep + this.primaryTemplateName + ".html";
+    this.templateFilePath = this.definedName + "Tmpl.html";
     this.absoluteJavascriptFilePath = this.resourcesPath + path.sep + this.javascriptFilePath;
-    this.absoluteTemplateFilePath = this.resourcesPath + path.sep + this.templateFilePath;
+    this.absoluteTemplateFilePath = this.resourcesPath + path.sep + "javascripts" + sep + this.templateFilePath;
   },
   promptProcess:function(props){
     methods.buildFilesPath.apply(this);

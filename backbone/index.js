@@ -24,7 +24,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
     this.option('testonly');
   },
   initializing: function () {
-    this.log(chalk.blue.bgCyan.bold('Current work path : ' + this.destinationRoot()));
+    this.log(chalk.blue.bold('Current work path : ' + this.destinationRoot()));
     //extract the file name from passed argument.
     var name = this.name;
     if (!MATCH_NAME.test(name)) {
