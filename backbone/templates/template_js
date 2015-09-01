@@ -39,6 +39,7 @@
                 {{#each templateScriptNames}}
                 {{#if @first}}
                 this.$el.html(this.template.{{templateName}}(this.getIdSuffixModelJSON()));
+                this.options.container && this.options.container.append(this.$el);
                 {{/if}}
                 {{/each}}
                 {{#if isGrid}}
@@ -165,10 +166,7 @@
             var View = EB_Common.Backbone.View.extend(this.View);
             var Model = Backbone.Model.extend(this.Model);
             var model = new Model(modelData || {});
-            var view = new View($.extend({ parentApp: parentApp, model: model },options||{}));
-            if(container){
-                container.append(view.$el);
-            }
+            var view = new View($.extend({container:container, parentApp: parentApp, model: model },options||{}));
             return view;
         }
     };
