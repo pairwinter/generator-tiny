@@ -20,6 +20,7 @@
     var {{appVarName}} = {
         {{#if model}}
         Model: {
+            appName:'{{appVarName}}',
             defaults: function () {
                 return {};
             },
@@ -28,6 +29,7 @@
         },
         {{/if}}
         View: {
+            appName:'{{appVarName}}',
             initialize: function () {
                 this.templateScriptNames = {{{templateScriptNamesJsonStr}}};
                 EB_Common.Backbone.View.prototype.initialize.apply(this,arguments);

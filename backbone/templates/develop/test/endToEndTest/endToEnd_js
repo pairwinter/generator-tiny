@@ -2,6 +2,7 @@ var test = require('selenium-webdriver/testing');
 var assert = require('selenium-webdriver/testing/assert');
 var tool  = require('{{requireToolsRelativePath}}/everbridgeWebDriverTool')('{{fileDirPath}}');
 var driver = tool.buildDriver();
+var webdriver = require('selenium-webdriver');
 /**
  * assert usage document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_testing_Assertion.html
  * assert(name).equalTo(otherName);
@@ -9,12 +10,22 @@ var driver = tool.buildDriver();
  * webelement.click();
  */
 test.describe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
-    test.it('Testing {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
-        driver.get(tool.wrap('{{developAppHtmlPath}}'))
-            .then(function(){
-                tool.writeScreenshot();
-            }).then(function(){
-                driver.quit();
+    test.before(function () {
+        driver.get(tool.wrap('accountSettings/security/passwordResetPolicyAppTest.html'));
+    });
+    test.after(function () {
+        driver.quit();
+    });
+    test.beforeEach(function () {
+        tool.writeScreenshot();
+    });
+    test.it('{{appVarName}} initialization',function(){
+        /*
+        tool.$("input").then(function (element) {
+            element.isSelected().then(function (isSelected) {
+                assert(isSelected).equalTo(true, "After page loaded, expect off radio checked is true, but get False");
             });
+        });
+        */
     });
 });
