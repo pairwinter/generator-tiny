@@ -25,7 +25,7 @@
                 return {};
             },
             initialize: function (attributes, options) {},
-            parseData: function (data) {}
+            parse: function (data) {}
         },
         {{/if}}
         View: {
