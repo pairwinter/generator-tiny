@@ -26,7 +26,14 @@ var methods = {
         name: 'resourcesPath',
         message: 'The resources path that you place javascript and template files.',
         store: true,
-        default: './resources'
+        default: './resources/javascript'
+      },
+      {
+        type: 'input',
+        name: 'appParentFolderName', //there are may folder in resourcesPath, this paramter is special which folder is to be used to place the app (**/**/**App.js, **/**/**AppTmpl.html)
+        message: 'The resources path that you place javascript and template files.',
+        store: true,
+        default: 'view'
       },
       {
         type: 'list',
@@ -55,13 +62,13 @@ var methods = {
     ];
   },
   buildFilesPath:function(){
-    this.javascriptFilePath = "javascripts" + sep + this.definedName + ".js";
+    this.javascriptFilePath = this.definedName + ".js";
     this.primaryTemplateName = this.baseFileName + 'Tmpl';
     //comment this line, change template folder to the js file folder.
     //this.templateFilePath = "tmpl" + sep + this.fileDirPath + sep + this.primaryTemplateName + ".html";
     this.templateFilePath = this.definedName + "Tmpl.html";
-    this.absoluteJavascriptFilePath = this.resourcesPath + path.sep + this.javascriptFilePath;
-    this.absoluteTemplateFilePath = this.resourcesPath + path.sep + "javascripts" + sep + this.templateFilePath;
+    this.absoluteJavascriptFilePath = this.resourcesPath + sep + this.javascriptFilePath;
+    this.absoluteTemplateFilePath = this.resourcesPath + sep + this.templateFilePath;
   },
   promptProcess:function(props){
     methods.buildFilesPath.apply(this);

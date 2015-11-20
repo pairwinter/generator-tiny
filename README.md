@@ -48,7 +48,7 @@ we will generate 3 files for testing
 Add the generator templates by the requirements of Project.
 
 
-## Release Histor
+## Release History
 
 2015-2-22       v0.2.7     add the testonly option to create the testing files for the existed apps.
 2015-2-5       v0.2.4      add the delete option to delete the files that created.

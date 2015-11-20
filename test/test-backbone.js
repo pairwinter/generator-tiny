@@ -12,7 +12,8 @@ describe('tiny:backbone', function () {
       .inDir('/Users/damon/Documents/TestData/generator/testing')
       .withArguments('settings/emailIngestion')
       .withPrompts({
-        resourcesPath: "./resources",
+        resourcesPath: "./resources/javascript",
+        appParentFolderName: "components",
         moduleType: 'grid',
         formValidation: true,
         templateScriptNames: '',

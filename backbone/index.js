@@ -65,13 +65,15 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
         resourcesPath = path.relative(this.destinationRoot(), resourcesPath);
         this.resourcesPath = resourcesPath;
       }
+      this.appParentFolderName = props.appParentFolderName;
+
       var testingPath = props.testingPath;
       if (testingPath && testingPath !== this.destinationRoot()) {
         testingPath = path.relative(this.destinationRoot(), testingPath);
         this.testingPath = testingPath;
       }
 
-      this.definedName = "views" + path.sep + this.fileDirPath + path.sep + this.baseFileName;
+      this.definedName = this.appParentFolderName + path.sep + this.fileDirPath + path.sep + this.baseFileName;
 
       if (this.options.delete) {
         deleteMethod.promptProcess.apply(this,[props]);
