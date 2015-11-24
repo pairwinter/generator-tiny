@@ -26,7 +26,7 @@ var methods = {
         name: 'resourcesPath',
         message: 'The resources path that you place javascript and template files.',
         store: true,
-        default: './resources/javascript'
+        default: './resources/javascripts'
       },
       {
         type: 'input',
