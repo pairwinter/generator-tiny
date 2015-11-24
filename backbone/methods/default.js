@@ -33,7 +33,7 @@ var methods = {
         name: 'appParentFolderName', //there are may folder in resourcesPath, this paramter is special which folder is to be used to place the app (**/**/**App.js, **/**/**AppTmpl.html)
         message: 'The app parent folder name which is the next level folder of resourcesPath.',
         store: true,
-        default: 'view'
+        default: 'views'
       },
       {
         type: 'list',
