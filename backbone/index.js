@@ -31,7 +31,7 @@ var TinyGenerator = yeoman.generators.NamedBase.extend({
       this.error("argument is illegal! please pass the argument like this: [path]fileName[.js], and file name must be [a-zA-Z0-9_-]");
       return;
     }
-    this.fileDirPath = path.dirname(name);
+    this.fileDirPath = name;
     var baseFileName = path.basename(name, '.js');
     if (!/App$/.test(baseFileName)) {
       baseFileName = baseFileName + 'App';
