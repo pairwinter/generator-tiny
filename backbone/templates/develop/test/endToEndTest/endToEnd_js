@@ -11,7 +11,7 @@ var webdriver = require('selenium-webdriver');
  */
 test.describe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
     test.before(function () {
-        driver.get(tool.wrap('accountSettings/security/passwordResetPolicyAppTest.html'));
+        driver.get(tool.wrap('{{developAppHtmlPath}}'));
     });
     test.after(function () {
         driver.quit();
