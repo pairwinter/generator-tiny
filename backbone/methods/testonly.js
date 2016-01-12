@@ -33,16 +33,16 @@ var methods = {
     ];
   },
   buildFilesPath:function(){
-    this.unitTestPath = "test" + sep + this.fileDirPath + sep + this.baseFileName + "-unitTest.js";
-    this.endToEndTestPath = "test" + sep + this.fileDirPath + sep + this.baseFileName + "-endToEndTest.js";
-    this.developTestHtmlPath = "app" + sep + this.fileDirPath + sep + this.baseFileName + "Test.html";
+    this.unitTestPath = "test" + sep + this.appParentFolderName + sep + this.fileDirPath + sep + this.baseFileName + "-unitTest.js";
+    this.endToEndTestPath = "test" + sep + this.appParentFolderName + sep + this.fileDirPath + sep + this.baseFileName + "-endToEndTest.js";
+    this.developTestHtmlPath = "app" + sep + this.appParentFolderName + sep + this.fileDirPath + sep + this.baseFileName + "Test.html";
     this.absoluteUnitTestPath = this.testingPath + sep + this.unitTestPath;
     this.absoluteEndToEndTestHtmlPath = this.testingPath + sep + this.endToEndTestPath;
     this.absoluteDevelopTestHtmlPath = this.testingPath + sep + this.developTestHtmlPath;
   },
   promptProcess:function(props){
     methods.buildFilesPath.apply(this);
-    var requireToolsRelativePath = path.relative('/app/' + this.fileDirPath,'/tools');
+    var requireToolsRelativePath = path.relative('/app/' + this.appParentFolderName + sep + this.fileDirPath,'/tools');
     this.developTestModelData = {
       unitTestPath:this.unitTestPath,
       endToEndTestPath:this.endToEndTestPath,
@@ -50,7 +50,7 @@ var methods = {
       appVarName:this.baseFileName, //unitTestPath used
       containerId:this.baseFileName + "Container", //used by develop_app_html
       fileDirPath: this.fileDirPath,
-      developAppHtmlPath : this.fileDirPath + sep + this.baseFileName + "Test.html",//used by endToEnd_js
+      developAppHtmlPath : this.appParentFolderName + sep + this.fileDirPath + sep + this.baseFileName + "Test.html",//used by endToEnd_js
       requireToolsRelativePath :requireToolsRelativePath
     }
   },
@@ -59,7 +59,7 @@ var methods = {
     this.write(this.absoluteUnitTestPath, this.unitTestTemplate(this.developTestModelData));
     this.write(this.absoluteEndToEndTestHtmlPath, this.endToEndTestTemplate(this.developTestModelData));
 
-    var url = 'http://localhost:9000/' + this.fileDirPath + sep + this.baseFileName + 'Test.html';
+    var url = 'http://localhost:9000/' + this.appParentFolderName + sep + this.fileDirPath + sep + this.baseFileName + 'Test.html';
     //this.log(chalk.blue.bgYellow('Please add blow url to the associate module of develop index.html : ') + chalk.blue.bold.bgYellow(url));
     this.log(chalk.blue.bold('Make sure the html files could be found by tiny_layout task!'));
     //open(url,function(){});

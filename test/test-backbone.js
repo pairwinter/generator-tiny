@@ -12,7 +12,7 @@ describe('tiny:backbone', function () {
       .inDir('/Users/damon/Documents/TestData/generator/testing')
       .withArguments('settings/emailIngestion')
       .withPrompts({
-        resourcesPath: "./resources/javascript",
+        resourcesPath: "./resources/javascripts",
         appParentFolderName: "components",
         moduleType: 'grid',
         formValidation: true,
@@ -22,13 +22,13 @@ describe('tiny:backbone', function () {
       .on('end', done);
   });
 
-  it('creates files', function () {
+  it('created files', function () {
     assert.file([
-      'resources/javascripts/views/settings/emailIngestionApp.js',
-      'resources/tmpl/settings/emailIngestionAppTmpl.html',
-      'develop/app/settings/emailIngestionAppTest.html',
-      'develop/test/settings/emailIngestionApp-unitTest.js',
-      'develop/test/settings/emailIngestionApp-endToEndTest.js'
+      'resources/javascripts/components/settings/emailIngestion/emailIngestionApp.js',
+      'resources/javascripts/components/settings/emailIngestion//emailIngestionAppTmpl.html',
+      'develop/app/components/settings/emailIngestion/emailIngestionAppTest.html',
+      'develop/test/components/settings/emailIngestion/emailIngestionApp-unitTest.js',
+      'develop/test/components/settings/emailIngestion/emailIngestionApp-endToEndTest.js'
     ]);
   });
 });
