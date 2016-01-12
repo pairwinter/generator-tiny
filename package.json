@@ -1,6 +1,6 @@
 {
   "name": "generator-tiny",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
@@ -37,8 +37,5 @@
     "mocha": "*",
     "open": "0.0.5",
     "rimraf": "^2.2.8"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
   }
 }
