@@ -19,7 +19,7 @@ test.describe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',functi
     test.beforeEach(function () {
         tool.writeScreenshot();
     });
-    test.it('{{appVarName}} initialization',function(){
+    test.xit('{{appVarName}} initialization',function(){
         /*
         tool.$("input").then(function (element) {
             element.isSelected().then(function (isSelected) {

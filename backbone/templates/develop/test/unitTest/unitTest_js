@@ -13,7 +13,7 @@ describe('load app {{definedName}} in {{unitTestPath}}',function(){
             done();
         });
     });
-    it('Test the instance of the defined module {{definedName}} in {{unitTestPath}}',function(done){
+    it.skip('Test the instance of the defined module {{definedName}} in {{unitTestPath}}',function(done){
         expect(app).to.be.a('object');
         app.should.be.a('object');
         expect(app.model.toJSON()).to.be.a('object');
