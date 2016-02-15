@@ -1,6 +1,6 @@
 var test = require('selenium-webdriver/testing');
 var assert = require('selenium-webdriver/testing/assert');
-var tool  = __developDir + 'tools/everbridgeWebDriverTool';
+var tool  = require(__developDir + 'tools/everbridgeWebDriverTool')('{{fileDirPath}}');
 var driver = tool.buildDriver();
 var webdriver = require('selenium-webdriver');
 /**

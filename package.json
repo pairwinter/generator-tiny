@@ -1,6 +1,6 @@
 {
   "name": "generator-tiny",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
