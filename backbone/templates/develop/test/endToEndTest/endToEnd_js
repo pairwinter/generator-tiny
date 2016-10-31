@@ -3,13 +3,7 @@ var assert = require('selenium-webdriver/testing/assert');
 var tool  = require(__developDir + 'tools/everbridgeWebDriverTool')('{{fileDirPath}}');
 var driver = tool.buildDriver();
 var webdriver = require('selenium-webdriver');
-/**
- * assert usage document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_testing_Assertion.html
- * assert(name).equalTo(otherName);
- * webdriver WebElement document http://selenium.googlecode.com/git/docs/api/javascript/class_webdriver_WebElement.html
- * webelement.click();
- */
-test.xdescribe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
+test.describe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',function(){
     test.before(function () {
         driver.get(tool.wrap('{{developAppHtmlPath}}'));
     });
@@ -19,7 +13,7 @@ test.xdescribe('Go to test {{endToEndTestPath}} in {{developAppHtmlPath}}',funct
     test.beforeEach(function () {
         tool.writeScreenshot();
     });
-    test.xit('{{appVarName}} initialization',function(){
+    test.it('{{appVarName}} initialization',function(){
         /*
         tool.$("input").then(function (element) {
             element.isSelected().then(function (isSelected) {
