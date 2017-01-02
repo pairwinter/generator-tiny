@@ -10,51 +10,71 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
 var TinyGenerator = yeoman.generators.Base.extend({
-    initializing: function () {
-        this.pkg = require('../package.json');
-    },
 
     prompting: function () {
-//        var done = this.async();
-//
-//        // Have Yeoman greet the user.
-//        this.log(yosay(
-//            'Welcome to the kickass Tiny generator!'
-//        ));
-//
-//        var prompts = [
-//            {
-//                type: 'confirm',
-//                name: 'someOption',
-//                message: 'Would you like to enable this option?',
-//                default: true
-//            }
-//        ];
-//
-//        this.prompt(prompts, function (props) {
-//            this.someOption = props.someOption;
-//            done();
-//        }.bind(this));
+        var done = this.async();
+
+       // Have Yeoman greet the user.
+       this.log(yosay(
+           'Welcome to the kickass Tiny generator!'
+       ));
+
+       var prompts = [
+           {
+               name: 'name',
+               message: 'Hey there what\'s your name?',
+               default: "John Doe"
+           },{
+                type: 'checkbox',
+                name: 'checks',
+                message: 'Which of these would you like?',
+                choices: [
+                    {
+                        name: "ThisThing",
+                        checked: true
+                    },{
+                        name: "ThatThing",
+                        checked: false
+                    },{
+                        name: "OtherThing",
+                        checked: false
+                    }
+
+                ]
+           },{
+                name:    "best",
+                type:    "list",
+                message: "Which of these is your favorite?",
+                choices: [ "dogs", "cats", "rats", "snakes" ],
+                default: "snakes"
+           }
+       ];
+
+       this.prompt(prompts, function (props) {
+           this.props = props;
+
+           done();
+       }.bind(this));
+
     },
 
-    writing: {
-//        app: function () {
-//            this.dest.mkdir('app');
-//            this.dest.mkdir('app/templates');
-//
-//            this.src.copy('_package.json', 'package.json');
-//            this.src.copy('_bower.json', 'bower.json');
-//        },
-//
-//        projectfiles: function () {
-//            this.src.copy('editorconfig', '.editorconfig');
-//            this.src.copy('jshintrc', '.jshintrc');
-//        }
-    },
+    writing: function(){
+        var done = this.async();
+        // console.log(this.props);
 
-    end: function () {
-        this.installDependencies();
+        var str = "Your name is "+this.props.name + " and you like:\n";
 
+        this.props.checks.forEach(function(check){
+            str += " - "+check+"\n";
+        });
+
+        str += "...and your favorite animal is "+this.props.best;
+
+        console.log("\n\n===================================");
+        console.log(str)
+        console.log("===================================\n\n");
+
+        done();
     }
 });
 
